@@ -9,3 +9,6 @@ exclude = [
 
 [lint]
 ignore = ["E501", "W503"]
+
+[lint.per-file-ignores]
+"test_*" = ["E501"]
