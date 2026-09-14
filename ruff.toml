@@ -1,0 +1,14 @@
+exclude = [
+    "*.html",
+    "*.pyc",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache"
+]
+
+[lint]
+ignore = ["E501", "W503"]
+
+[lint.per-file-ignores]
+"test_*" = ["E501"]
