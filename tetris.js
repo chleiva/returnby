@@ -60,7 +60,7 @@ function showGameOver() {
     }
 }
 
-// Reset the game state
+// Reset the game state and restart the game loop
 function resetGame() {
     grid = createGrid();
     score = 0;
@@ -77,6 +77,11 @@ function resetGame() {
     const gameOverScreen = document.getElementById('game-over-screen');
     if (gameOverScreen) {
         gameOverScreen.classList.remove('visible');
+    }
+    
+    // Restart the game loop if it was stopped
+    if (!gameOver) {
+        gameLoop();
     }
 }
 
@@ -99,7 +104,9 @@ function initGame(gameCanvas, nextPieceCanvas, scoreElement, levelElement) {
     // Add restart button event listener
     const restartButton = document.getElementById('restart-button');
     if (restartButton) {
-        restartButton.addEventListener('click', resetGame);
+        restartButton.addEventListener('click', () => {
+            resetGame();
+        });
     }
 
     spawnPiece();
