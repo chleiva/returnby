@@ -23,9 +23,24 @@ let currentPiece = null;
 let nextPiece = null;
 let score = 0;
 let level = 1;
+let linesClearedTotal = 0;
 let gameOver = false;
 let dropInterval = 1000;
 let dropStart = 0;
+
+// Scoring rules (points for 1, 2, 3, 4 lines)
+const SCORE_TABLE = {
+    0: 0,
+    1: 100,
+    2: 300,
+    3: 500,
+    4: 800
+};
+
+// Level progression: speed increases every 10 lines
+const LINES_PER_LEVEL = 10;
+const MIN_DROP_INTERVAL = 100; // Fastest speed (ms)
+const DROP_INTERVAL_DECREMENT = 100; // Speed increase per level (ms)
 
 // Canvas and UI elements
 let canvas, ctx, nextCanvas, nextCtx, scoreDisplay, levelDisplay;
@@ -304,20 +319,21 @@ function clearLines() {
     }
     
     if (linesCleared > 0) {
+        linesClearedTotal += linesCleared;
         updateScore(linesCleared);
     }
 }
 
-// Update score based on lines cleared
+// Update score based on lines cleared and level
 function updateScore(linesCleared = 0) {
-    const points = [0, 40, 100, 300, 1200]; // Points for 0, 1, 2, 3, 4 lines
-    score += points[linesCleared] * level;
+    // Apply scoring rules (points multiplied by level)
+    score += SCORE_TABLE[linesCleared] * level;
     
-    // Update level every 10 lines
-    level = Math.floor(score / 1000) + 1;
+    // Update level based on total lines cleared
+    level = Math.floor(linesClearedTotal / LINES_PER_LEVEL) + 1;
     
-    // Increase game speed (cap at 100ms)
-    dropInterval = Math.max(100, 1000 - (level - 1) * 100);
+    // Increase game speed (cap at MIN_DROP_INTERVAL)
+    dropInterval = Math.max(MIN_DROP_INTERVAL, 1000 - (level - 1) * DROP_INTERVAL_DECREMENT);
     
     if (scoreDisplay) {
         scoreDisplay.textContent = score;
