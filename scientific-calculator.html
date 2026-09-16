@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <link rel="stylesheet" href="scientific-calculator.css">
+</head>
+<body>
+    <main>
+        <article aria-label="Scientific Calculator">
+            <h1>Scientific Calculator</h1>
+            
+            <!-- Display -->
+            <section class="calculator-display" aria-live="polite">
+                <input type="text" id="calc-input" class="calc-input" readonly aria-label="Calculator input">
+                <div id="calc-result" class="calc-result" aria-label="Calculator result"></div>
+            </section>
+            
+            <!-- Buttons -->
+            <section class="calculator-buttons">
+                <!-- Row 1: Memory and Clear -->
+                <div class="button-row">
+                    <button id="clear" class="button button-secondary" aria-label="Clear">C</button>
+                    <button id="memory-clear" class="button button-secondary" aria-label="Memory Clear">MC</button>
+                    <button id="memory-recall" class="button button-secondary" aria-label="Memory Recall">MR</button>
+                    <button id="memory-plus" class="button button-secondary" aria-label="Memory Plus">M+</button>
+                    <button id="memory-minus" class="button button-secondary" aria-label="Memory Minus">M-</button>
+                </div>
+                
+                <!-- Row 2: Scientific Functions -->
+                <div class="button-row">
+                    <button id="sin" class="button button-function" aria-label="Sine">sin</button>
+                    <button id="cos" class="button button-function" aria-label="Cosine">cos</button>
+                    <button id="tan" class="button button-function" aria-label="Tangent">tan</button>
+                    <button id="log" class="button button-function" aria-label="Logarithm base 10">log</button>
+                    <button id="ln" class="button button-function" aria-label="Natural logarithm">ln</button>
+                </div>
+                
+                <!-- Row 3: Scientific Functions -->
+                <div class="button-row">
+                    <button id="sqrt" class="button button-function" aria-label="Square root">√</button>
+                    <button id="pow" class="button button-function" aria-label="Power">x^y</button>
+                    <button id="pi" class="button button-function" aria-label="Pi">π</button>
+                    <button id="e" class="button button-function" aria-label="Euler's number">e</button>
+                    <button id="factorial" class="button button-function" aria-label="Factorial">x!</button>
+                </div>
+                
+                <!-- Row 4: Parentheses and Operations -->
+                <div class="button-row">
+                    <button id="left-paren" class="button button-operation" aria-label="Left parenthesis">(</button>
+                    <button id="right-paren" class="button button-operation" aria-label="Right parenthesis">)</button>
+                    <button id="divide" class="button button-operation" aria-label="Divide">/</button>
+                    <button id="multiply" class="button button-operation" aria-label="Multiply">*</button>
+                    <button id="backspace" class="button button-secondary" aria-label="Backspace">⌫</button>
+                </div>
+                
+                <!-- Row 5: Digits and Operations -->
+                <div class="button-row">
+                    <button id="seven" class="button button-digit" aria-label="Seven">7</button>
+                    <button id="eight" class="button button-digit" aria-label="Eight">8</button>
+                    <button id="nine" class="button button-digit" aria-label="Nine">9</button>
+                    <button id="subtract" class="button button-operation" aria-label="Subtract">-</button>
+                </div>
+                
+                <!-- Row 6: Digits and Operations -->
+                <div class="button-row">
+                    <button id="four" class="button button-digit" aria-label="Four">4</button>
+                    <button id="five" class="button button-digit" aria-label="Five">5</button>
+                    <button id="six" class="button button-digit" aria-label="Six">6</button>
+                    <button id="add" class="button button-operation" aria-label="Add">+</button>
+                </div>
+                
+                <!-- Row 7: Digits, Decimal, Equals -->
+                <div class="button-row">
+                    <button id="one" class="button button-digit" aria-label="One">1</button>
+                    <button id="two" class="button button-digit" aria-label="Two">2</button>
+                    <button id="three" class="button button-digit" aria-label="Three">3</button>
+                    <button id="equals" class="button button-equals" aria-label="Equals">=</button>
+                </div>
+                
+                <!-- Row 8: Zero, Decimal -->
+                <div class="button-row">
+                    <button id="zero" class="button button-digit" aria-label="Zero">0</button>
+                    <button id="decimal" class="button button-digit" aria-label="Decimal point">.</button>
+                </div>
+            </section>
+        </article>
+    </main>
+    
+    <script src="scientific-calculator.js"></script>
+</body>
+</html>
