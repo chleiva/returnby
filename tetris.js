@@ -45,6 +45,41 @@ const DROP_INTERVAL_DECREMENT = 100; // Speed increase per level (ms)
 // Canvas and UI elements
 let canvas, ctx, nextCanvas, nextCtx, scoreDisplay, levelDisplay;
 
+// Update the game over state and show the game over screen
+function showGameOver() {
+    gameOver = true;
+    const gameOverScreen = document.getElementById('game-over-screen');
+    const finalScoreDisplay = document.getElementById('final-score');
+    
+    if (finalScoreDisplay) {
+        finalScoreDisplay.textContent = score;
+    }
+    
+    if (gameOverScreen) {
+        gameOverScreen.classList.add('visible');
+    }
+}
+
+// Reset the game state
+function resetGame() {
+    grid = createGrid();
+    score = 0;
+    level = 1;
+    linesClearedTotal = 0;
+    gameOver = false;
+    dropInterval = 1000;
+    
+    updateScore();
+    spawnPiece();
+    spawnNextPiece();
+    dropStart = Date.now();
+    
+    const gameOverScreen = document.getElementById('game-over-screen');
+    if (gameOverScreen) {
+        gameOverScreen.classList.remove('visible');
+    }
+}
+
 // Initialize the game with provided elements
 function initGame(gameCanvas, nextPieceCanvas, scoreElement, levelElement) {
     canvas = gameCanvas;
@@ -60,6 +95,12 @@ function initGame(gameCanvas, nextPieceCanvas, scoreElement, levelElement) {
     canvas.height = ROWS * BLOCK_SIZE;
     nextCanvas.width = 4 * BLOCK_SIZE;
     nextCanvas.height = 4 * BLOCK_SIZE;
+
+    // Add restart button event listener
+    const restartButton = document.getElementById('restart-button');
+    if (restartButton) {
+        restartButton.addEventListener('click', resetGame);
+    }
 
     spawnPiece();
     spawnNextPiece();
@@ -91,7 +132,7 @@ function spawnPiece() {
     // Check if game over
     if (collision()) {
         gameOver = true;
-        alert("Game Over!");
+        showGameOver();
     }
 }
 

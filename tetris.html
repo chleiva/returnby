@@ -17,6 +17,12 @@
                 <canvas id="next-piece-canvas" class="next-piece-canvas"></canvas>
             </div>
         </div>
+        <!-- Game Over Screen (hidden by default) -->
+        <div id="game-over-screen" class="game-over-screen">
+            <h2>Game Over</h2>
+            <p>Final Score: <span id="final-score">0</span></p>
+            <button id="restart-button">Restart</button>
+        </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
