@@ -86,7 +86,7 @@ function spawnNextPiece() {
     nextPiece = {
         shape: SHAPES[randomIndex].shape,
         color: SHAPES[randomIndex].color,
-        pos: { x: 0, y: 0 }
+        pos: { x: 1, y: 1 } // Center the preview
     };
     drawNextPiece();
 }
@@ -94,16 +94,29 @@ function spawnNextPiece() {
 // Draw the next piece on the preview canvas
 function drawNextPiece() {
     nextCtx.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
+    if (!nextPiece) return;
+    
     const shape = nextPiece.shape;
     const blockSize = BLOCK_SIZE;
+    // Calculate the offset to center the piece
+    const offsetX = (nextCanvas.width / blockSize - shape[0].length) / 2;
+    const offsetY = (nextCanvas.height / blockSize - shape.length) / 2;
     
     shape.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value) {
                 nextCtx.fillStyle = nextPiece.color;
-                nextCtx.fillRect(x * blockSize, y * blockSize, blockSize, blockSize);
+                nextCtx.fillRect(
+                    (x + offsetX) * blockSize,
+                    (y + offsetY) * blockSize,
+                    blockSize, blockSize
+                );
                 nextCtx.strokeStyle = "black";
-                nextCtx.strokeRect(x * blockSize, y * blockSize, blockSize, blockSize);
+                nextCtx.strokeRect(
+                    (x + offsetX) * blockSize,
+                    (y + offsetY) * blockSize,
+                    blockSize, blockSize
+                );
             }
         });
     });
