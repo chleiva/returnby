@@ -18,6 +18,16 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('tetris-canvas');
+            const nextPieceCanvas = document.getElementById('next-piece-canvas');
+            const scoreDisplay = document.getElementById('score');
+            const levelDisplay = document.getElementById('level');
+            
+            initGame(canvas, nextPieceCanvas, scoreDisplay, levelDisplay);
+        });
+    </script>
     <script src="tetris.js"></script>
 </body>
 </html>

@@ -27,20 +27,25 @@ let gameOver = false;
 let dropInterval = 1000;
 let dropStart = 0;
 
-// Canvas setup
-const canvas = document.getElementById("tetris-canvas");
-const ctx = canvas.getContext("2d");
-const nextCanvas = document.getElementById("next-piece-canvas");
-const nextCtx = nextCanvas.getContext("2d");
+// Canvas and UI elements
+let canvas, ctx, nextCanvas, nextCtx, scoreDisplay, levelDisplay;
 
-// Set canvas dimensions
-canvas.width = COLS * BLOCK_SIZE;
-canvas.height = ROWS * BLOCK_SIZE;
-nextCanvas.width = 4 * BLOCK_SIZE;
-nextCanvas.height = 4 * BLOCK_SIZE;
+// Initialize the game with provided elements
+function initGame(gameCanvas, nextPieceCanvas, scoreElement, levelElement) {
+    canvas = gameCanvas;
+    nextCanvas = nextPieceCanvas;
+    scoreDisplay = scoreElement;
+    levelDisplay = levelElement;
+    
+    ctx = canvas.getContext("2d");
+    nextCtx = nextCanvas.getContext("2d");
 
-// Initialize the game
-function init() {
+    // Set canvas dimensions
+    canvas.width = COLS * BLOCK_SIZE;
+    canvas.height = ROWS * BLOCK_SIZE;
+    nextCanvas.width = 4 * BLOCK_SIZE;
+    nextCanvas.height = 4 * BLOCK_SIZE;
+
     spawnPiece();
     spawnNextPiece();
     updateScore();
@@ -301,8 +306,12 @@ function updateScore(linesCleared = 0) {
     // Increase game speed (cap at 100ms)
     dropInterval = Math.max(100, 1000 - (level - 1) * 100);
     
-    document.getElementById("score").textContent = score;
-    document.getElementById("level").textContent = level;
+    if (scoreDisplay) {
+        scoreDisplay.textContent = score;
+    }
+    if (levelDisplay) {
+        levelDisplay.textContent = level;
+    }
 }
 
 // Handle keyboard input
@@ -324,6 +333,3 @@ function handleKeyPress(event) {
             break;
     }
 }
-
-// Start the game
-init();
